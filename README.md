@@ -6,5 +6,5 @@ This project will utilze the model proposed by the 2015 paper "UNSUPERVISED REPR
 
 Dataset used: https://www.kaggle.com/datasets/bryanb/abstract-art-gallery
 
-<img src="">
+<img src="https://github.com/therealcyberlord/DCGAN/blob/master/GIFS/gan-visualization.gif" width="100%">
 

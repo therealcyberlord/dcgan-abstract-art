@@ -8,5 +8,8 @@ Dataset used: https://www.kaggle.com/datasets/bryanb/abstract-art-gallery
 
 <img src="https://github.com/therealcyberlord/DCGAN/blob/master/GIFS/gan-visulization.gif" width="100%">
 
+Sources:
+* Arvix Paper: https://arxiv.org/pdf/1511.06434v2.pdf
+
 * This also take a lot of inspiration from the PyTorch DCGAN Tutorial, check it out <a href="https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html">here</a>
 

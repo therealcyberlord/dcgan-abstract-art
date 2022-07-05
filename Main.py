@@ -8,19 +8,18 @@ import numpy as np
 from Dataset import DatasetProcessing
 
 
-if __name__ == "__main__":
-
+def main():
     # set seed for replicable results s
-    seed = random.randint(0, 10000)
-    torch.manual_seed(seed)
-    random.seed(seed)
+    torch.manual_seed(999)
+    random.seed(10)
 
+    epochs = 10
     latent_size = 100
     batch_size = 32
     lr = 0.0002
     width = height = 64
     beta1 = 0.5
-    checkpoint_path = "Checkpoints/100epochs.chkpt"
+    checkpoint_path = "Checkpoints/150epochs.chkpt"
     image_path = "Dataset"
 
     device = torch.device("cpu")
@@ -56,6 +55,11 @@ if __name__ == "__main__":
     plt.title("Generated Fakes")
     plt.imshow(np.transpose(vutils.make_grid(fakes, padding=2, normalize=True),(1,2,0)))
     plt.show()
+
+
+if __name__ == "__main__":
+    main()
+
 
 
 

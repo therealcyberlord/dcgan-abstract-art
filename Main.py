@@ -13,30 +13,25 @@ def main():
     torch.manual_seed(999)
     random.seed(10)
 
-    epochs = 10
     latent_size = 100
     batch_size = 32
     lr = 0.0002
-    width = height = 64
     beta1 = 0.5
     checkpoint_path = "Checkpoints/150epochs.chkpt"
-    image_path = "Dataset"
 
+
+    # check if there is a CUDA-compatible GPU, otherwise use a CPU 
     device = torch.device("cpu")
 
     if torch.cuda.is_available():
         device = torch.device("cuda")
 
-    # load and preprocess the data 
-    dataset_processing = DatasetProcessing(image_path, height, width)
-    # print(dataset_processing.__len__())
-    data_loader = dataset_processing.create_data_loader(batch_size, shuffle=True)
-
-
+    # sample from the normal distribution 
     sampled_noise  = torch.randn(batch_size, latent_size, 1, 1, device=device)
     generator = Model.Generator(latent_size).to(device)
     discriminator = Model.Discriminator().to(device)
 
+    # defining the models 
     generator_optim = Adam(generator.parameters(), lr=lr, betas=(beta1, 0.999))
     discriminator_optim = Adam(discriminator.parameters(), lr=lr, betas=(beta1, 0.999))
 

@@ -11,14 +11,16 @@ from Dataset import DatasetProcessing
 if __name__ == "__main__":
 
     # set seed for replicable results s
-    torch.manual_seed(999)
-    random.seed(10)
+    seed = random.randint(0, 10000)
+    torch.manual_seed(seed)
+    random.seed(seed)
+
     latent_size = 100
     batch_size = 32
     lr = 0.0002
     width = height = 64
     beta1 = 0.5
-    checkpoint_path = "Checkpoints/70epochs.chkpt"
+    checkpoint_path = "Checkpoints/100epochs.chkpt"
     image_path = "Dataset"
 
     device = torch.device("cpu")

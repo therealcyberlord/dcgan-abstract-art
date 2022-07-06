@@ -17,7 +17,9 @@ Navigate to the cloned/downloaded directory and run
 ``` python Main.py [seed] [num_images] [checkpoint_num]```
 
 
-the arg values will be type integer and num_images must be in the range [0, 64]
+the arg values will be in type integer and num_images must be in the range [0, 64]
+
+Run ```pip Main.py -h``` for more information
 
 <img src="https://github.com/therealcyberlord/DCGAN/blob/master/GIFS/gan-visulization.gif" width="100%">
 

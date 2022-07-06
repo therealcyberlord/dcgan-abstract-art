@@ -13,7 +13,7 @@ Download the libraries used with
 ``` pip install -r requirements.txt ```
 
 
-Navigate to the cloned/downloaded directory and run
+Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
 ``` python Main.py [seed] [num_images] [checkpoint_num]```
 
 

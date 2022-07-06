@@ -19,7 +19,7 @@ Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
 eg: ``` python Main.py 1239 32 100 ``` 
 
 ***
-the arg values will be in type integer and num_images must be in the range [0, 64]
+the arg values will be in type integer and num_images must be in the range (0, 64]
 
 checkpoint_num $\in$ [70, 100, 120, 150]
 

@@ -1,4 +1,4 @@
-# Generating abstract art using DCGAN
+# Generating abstract art using DCGAN Live Demo
 
 The goal of this project is to train a DCGAN to generate new works of abstract art. The implementation will be done in PyTorch. 
 

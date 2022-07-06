@@ -11,12 +11,12 @@ import argparse
 def main():
     # command line capabilities 
 
-    size_limit = 104
+    size_limit = 120
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("seed", help="random seed for generating images", type=int)
     parser.add_argument(f"num_images", help="how many images to generate (max: {size_limit})", type=int)
-    parser.add_argument("checkpoint", help="checkpoint to use {70, 100, 120, 150}", type=int)
+    parser.add_argument("--seed", help="random seed for generating images", type=int, default=random.randint(0, 1e4))
+    parser.add_argument("--checkpoint", help="checkpoint to use {70, 100, 120, 150}", type=int, default=150)
 
     args = parser.parse_args()
 
@@ -61,7 +61,9 @@ def main():
     fakes = generator(sampled_noise).detach().cpu()
 
     # plot generated fakes 
+
     plt.figure(figsize=(18,18))
+    plt.title(f"Seed: {args.seed}")
     plt.axis("off")
     plt.imshow(np.transpose(vutils.make_grid(fakes, padding=2, normalize=True),(2,1,0)))
     plt.show()

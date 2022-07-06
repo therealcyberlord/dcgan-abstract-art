@@ -16,7 +16,9 @@ Download the libraries used with
 Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
 ``` python Main.py [seed] [num_images] [checkpoint_num]```
 
+eg: ``` python Main.py 1239 32 100 ``` 
 
+***
 the arg values will be in type integer and num_images must be in the range [0, 64]
 
 checkpoint_num $\in$ [70, 100, 120, 150]

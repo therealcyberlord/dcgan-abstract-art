@@ -11,16 +11,17 @@ import argparse
 def main():
     # command line capabilities 
 
+    size_limit = 104
     parser = argparse.ArgumentParser()
 
     parser.add_argument("seed", help="random seed for generating images", type=int)
-    parser.add_argument("num_images", help="how many images to generate (max: 64)", type=int)
+    parser.add_argument(f"num_images", help="how many images to generate (max: {size_limit})", type=int)
     parser.add_argument("checkpoint", help="checkpoint to use {70, 100, 120, 150}", type=int)
 
     args = parser.parse_args()
 
     # adding some constraints 
-    assert args.num_images <= 64, "Cannot exceed size limit 64"
+    assert args.num_images <= size_limit, f"Cannot exceed size limit {size_limit}"
     assert args.num_images > 0, "Num images must be greater than 0"
 
     # set seed for replicable results s
@@ -62,7 +63,7 @@ def main():
     # plot generated fakes 
     plt.figure(figsize=(18,18))
     plt.axis("off")
-    plt.imshow(np.transpose(vutils.make_grid(fakes, padding=2, normalize=True),(1,2,0)))
+    plt.imshow(np.transpose(vutils.make_grid(fakes, padding=2, normalize=True),(2,1,0)))
     plt.show()
 
 

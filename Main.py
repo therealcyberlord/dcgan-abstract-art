@@ -29,7 +29,6 @@ def main():
     random.seed(args.seed)
 
     latent_size = 100
-    batch_size = 32
     lr = 0.0002
     beta1 = 0.5
     checkpoint_path = f"Checkpoints/{args.checkpoint}epochs.chkpt"

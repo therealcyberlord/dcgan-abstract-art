@@ -61,6 +61,7 @@ def main():
 
     # plot generated fakes 
     plt.figure(figsize=(18,18))
+    plt.axis("off")
     plt.imshow(np.transpose(vutils.make_grid(fakes, padding=2, normalize=True),(1,2,0)))
     plt.show()
 

@@ -14,7 +14,7 @@ Download the libraries used with
 
 
 Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
-``` python Main.py [num_images] [--seed=somenumber][--checkpoint=somenumber]```
+``` python Main.py [num_images] [--seed=somenumber] [--checkpoint=somenumber]```
 
 eg: ``` python Main.py 104 --seed=90 --checkpoint=120 ``` 
 

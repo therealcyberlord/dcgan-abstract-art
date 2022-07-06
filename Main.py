@@ -5,19 +5,31 @@ import random
 import Model
 import matplotlib.pyplot as plt 
 import numpy as np 
-from Dataset import DatasetProcessing
+import argparse
 
 
 def main():
+    # command line capabilities 
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("seed", help="random seed for generating images", type=int)
+    parser.add_argument("num_images", help="how many images to generate (max: 64)", type=int)
+    parser.add_argument("checkpoint", help="checkpoint to use {70, 100, 120, 150}", type=int)
+
+    args = parser.parse_args()
+
+    assert args.num_images <= 64, "Cannot exceed size limit 64"
+
     # set seed for replicable results s
-    torch.manual_seed(999)
-    random.seed(10)
+    torch.manual_seed(args.seed)
+    random.seed(args.seed)
 
     latent_size = 100
     batch_size = 32
     lr = 0.0002
     beta1 = 0.5
-    checkpoint_path = "Checkpoints/150epochs.chkpt"
+    checkpoint_path = f"Checkpoints/{args.checkpoint}epochs.chkpt"
 
 
     # check if there is a CUDA-compatible GPU, otherwise use a CPU 
@@ -27,7 +39,7 @@ def main():
         device = torch.device("cuda")
 
     # sample from the normal distribution 
-    sampled_noise  = torch.randn(batch_size, latent_size, 1, 1, device=device)
+    sampled_noise  = torch.randn(args.num_images, latent_size, 1, 1, device=device)
     generator = Model.Generator(latent_size).to(device)
     discriminator = Model.Discriminator().to(device)
 

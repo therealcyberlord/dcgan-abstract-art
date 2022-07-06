@@ -19,6 +19,7 @@ def main():
 
     args = parser.parse_args()
 
+    # adding some constraints 
     assert args.num_images <= 64, "Cannot exceed size limit 64"
     assert args.num_images > 0, "Num images must be greater than 0"
 
@@ -60,8 +61,6 @@ def main():
 
     # plot generated fakes 
     plt.figure(figsize=(18,18))
-    plt.axis("off")
-    plt.title("Generated Fakes")
     plt.imshow(np.transpose(vutils.make_grid(fakes, padding=2, normalize=True),(1,2,0)))
     plt.show()
 

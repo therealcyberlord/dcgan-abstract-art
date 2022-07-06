@@ -14,14 +14,14 @@ Download the libraries used with
 
 
 Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
-``` python Main.py [seed] [num_images] [checkpoint_num]```
+``` python Main.py [num_images] [--seed=somenumber][--checkpoint_num=somenumber]```
 
-eg: ``` python Main.py 1239 32 100 ``` 
+eg: ``` python Main.py 104 -seed=90 checkpoint_num=120 ``` 
 
 ***
-the arg values will be in type integer and num_images must be in the range (0, 104]
+the arg values will be in type integer and num_images must be in the range (0, 120], only the argument num_images is required.
 
-checkpoint_num $\in$ [70, 100, 120, 150]
+checkpoint_num $\in$ [70, 100, 120, 150], default: 150
 
 Run ```pip Main.py -h``` for more information
 

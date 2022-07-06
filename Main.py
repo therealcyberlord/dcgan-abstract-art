@@ -33,7 +33,7 @@ def main():
     checkpoint_path = f"Checkpoints/{args.checkpoint}epochs.chkpt"
 
 
-    # check if there is a CUDA-compatible GPU, otherwise use a CPU 
+    # check if there is a CUDA-compatible GPU, otherwise use a CPU
     device = torch.device("cpu")
 
     if torch.cuda.is_available():
@@ -48,8 +48,9 @@ def main():
     generator_optim = Adam(generator.parameters(), lr=lr, betas=(beta1, 0.999))
     discriminator_optim = Adam(discriminator.parameters(), lr=lr, betas=(beta1, 0.999))
 
-    # restore to the checkpoint 
-    checkpoint = torch.load(checkpoint_path)
+    # restore to the checkpoint
+
+    checkpoint = torch.load(checkpoint_path, map_location=device)
     generator.load_state_dict(checkpoint['generator_state_dict'])
     discriminator.load_state_dict(checkpoint['discriminator_state_dict'])
     generator_optim.load_state_dict(checkpoint['generator_optim_state_dict'])

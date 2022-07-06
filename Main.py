@@ -20,6 +20,7 @@ def main():
     args = parser.parse_args()
 
     assert args.num_images <= 64, "Cannot exceed size limit 64"
+    assert args.num_images > 0, "Num images must be greater than 0"
 
     # set seed for replicable results s
     torch.manual_seed(args.seed)

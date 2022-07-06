@@ -19,6 +19,8 @@ Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
 
 the arg values will be in type integer and num_images must be in the range [0, 64]
 
+checkpoint_num $\in$ [70, 100, 120, 150]
+
 Run ```pip Main.py -h``` for more information
 
 <img src="https://github.com/therealcyberlord/DCGAN/blob/master/GIFS/gan-visulization.gif" width="100%">

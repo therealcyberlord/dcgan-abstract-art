@@ -6,6 +6,19 @@ This project will utilze the model proposed by the 2015 paper "UNSUPERVISED REPR
 
 Dataset used: https://www.kaggle.com/datasets/bryanb/abstract-art-gallery
 
+# Running the project locally 
+
+Download the libraries used with
+
+``` pip install -r requirements.txt ```
+
+
+Navigate to the cloned directory and run
+``` python Main.py [seed] [num_images] [checkpoint_num]```
+
+
+the arg values will be type integer and num_images must be in the range [0, 64]
+
 <img src="https://github.com/therealcyberlord/DCGAN/blob/master/GIFS/gan-visulization.gif" width="100%">
 
 Sources:

@@ -57,7 +57,10 @@ def main():
     generator_optim.load_state_dict(checkpoint['generator_optim_state_dict'])
     discriminator_optim.load_state_dict(checkpoint['discriminator_optim_state_dict'])
 
-    fakes = generator(sampled_noise).detach().cpu()
+    # evaluating the model, this turns off the batchnorm layers
+    generator.eval()
+    with torch.no_grad():
+        fakes = generator(sampled_noise).detach().cpu()
 
     # plot generated fakes 
 

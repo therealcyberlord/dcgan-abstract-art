@@ -19,7 +19,7 @@ def main():
     parser.add_argument(f"num_images", help="how many images to generate (max: {size_limit})", type=int)
     parser.add_argument("--seed", help="random seed for generating images", type=int, default=random.randint(0, 1e4))
     parser.add_argument("--checkpoint", help="checkpoint to use {70, 100, 120, 150}", type=int, default=150)
-    parser.add_argument("--srgan", help="use super resolution (experimental)", type=Boolean, default=False)
+    parser.add_argument("--srgan", help="use super resolution (experimental) 0 for no super resolution, any non-zero value for super resolution", type=int, default=0)
 
     args = parser.parse_args()
 
@@ -60,7 +60,7 @@ def main():
 
     # use srgan
 
-    if args.srgan:
+    if args.srgan != 0:
         srgan_generator = SRGAN.GeneratorResNet().to(device)
         srgan_generator.load_state_dict(torch.load(f"Checkpoints/srgan_10.pth", map_location=device))
 

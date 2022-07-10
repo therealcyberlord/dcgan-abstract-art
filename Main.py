@@ -1,8 +1,10 @@
+from xmlrpc.client import Boolean
 import torch 
 from torch.optim import Adam
 import torchvision.utils as vutils 
 import random 
-import Model
+import DCGAN
+import SRGAN
 import matplotlib.pyplot as plt 
 import numpy as np 
 import argparse
@@ -17,6 +19,7 @@ def main():
     parser.add_argument(f"num_images", help="how many images to generate (max: {size_limit})", type=int)
     parser.add_argument("--seed", help="random seed for generating images", type=int, default=random.randint(0, 1e4))
     parser.add_argument("--checkpoint", help="checkpoint to use {70, 100, 120, 150}", type=int, default=150)
+    parser.add_argument("--srgan", help="use super resolution (experimental)", type=Boolean, default=False)
 
     args = parser.parse_args()
 
@@ -42,33 +45,43 @@ def main():
 
     # sample from the normal distribution 
     sampled_noise  = torch.randn(args.num_images, latent_size, 1, 1, device=device)
-    generator = Model.Generator(latent_size).to(device)
-    discriminator = Model.Discriminator().to(device)
+    generator = DCGAN.Generator(latent_size).to(device)
 
-    # defining the models 
-    generator_optim = Adam(generator.parameters(), lr=lr, betas=(beta1, 0.999))
-    discriminator_optim = Adam(discriminator.parameters(), lr=lr, betas=(beta1, 0.999))
 
     # restore to the checkpoint
 
-    checkpoint = torch.load(checkpoint_path, map_location=device)
-    generator.load_state_dict(checkpoint['generator_state_dict'])
-    discriminator.load_state_dict(checkpoint['discriminator_state_dict'])
-    generator_optim.load_state_dict(checkpoint['generator_optim_state_dict'])
-    discriminator_optim.load_state_dict(checkpoint['discriminator_optim_state_dict'])
+    dcgan_checkpoint = torch.load(checkpoint_path, map_location=device)
+    generator.load_state_dict(dcgan_checkpoint['generator_state_dict'])
 
-    # evaluating the model, this turns off the batchnorm layers
     generator.eval()
+        
     with torch.no_grad():
-        fakes = generator(sampled_noise).detach().cpu()
+        fakes = generator(sampled_noise).detach()
 
-    # plot generated fakes 
+    # use srgan
 
-    plt.figure(figsize=(18,18))
-    plt.title(f"Seed: {args.seed}")
-    plt.axis("off")
-    plt.imshow(np.transpose(vutils.make_grid(fakes, padding=2, normalize=True),(2,1,0)))
-    plt.show()
+    if args.srgan:
+        srgan_generator = SRGAN.GeneratorResNet().to(device)
+        srgan_generator.load_state_dict(torch.load(f"Checkpoints/srgan_10.pth", map_location=device))
+
+        srgan_generator.eval()
+        with torch.no_grad():
+             enhanced_fakes = srgan_generator(fakes).detach().cpu()
+
+        plt.figure(figsize=(12,12))
+        plt.title(f"Seed: {args.seed}")
+        plt.axis("off")
+        plt.imshow(np.transpose(vutils.make_grid(enhanced_fakes, padding=2, normalize=True),(2,1,0)))
+        plt.show()
+ 
+    # default setting -> vanilla dcgan generation
+
+    else:
+        plt.figure(figsize=(12,12))
+        plt.title(f"Seed: {args.seed}")
+        plt.axis("off")
+        plt.imshow(np.transpose(vutils.make_grid(fakes.cpu(), padding=2, normalize=True),(2,1,0)))
+        plt.show()
 
 
 if __name__ == "__main__":

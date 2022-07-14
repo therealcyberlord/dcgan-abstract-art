@@ -18,7 +18,7 @@ def main():
     parser.add_argument(f"num_images", help="how many images to generate (max: {size_limit})", type=int)
     parser.add_argument("--seed", help="random seed for generating images", type=int, default=random.randint(0, 1e4))
     parser.add_argument("--checkpoint", help="checkpoint to use {70, 100, 120, 150}", type=int, default=150)
-    parser.add_argument("--srgan", help="use super resolution (experimental) 0 for no super resolution, any non-zero value for super resolution", type=int, default=0)
+    parser.add_argument("--srgan", help="use super resolution (experimental)", action="store_true")
 
     args = parser.parse_args()
 
@@ -31,8 +31,6 @@ def main():
     random.seed(args.seed)
 
     latent_size = 100
-    lr = 0.0002
-    beta1 = 0.5
     checkpoint_path = f"Checkpoints/{args.checkpoint}epochs.chkpt"
 
 
@@ -59,15 +57,16 @@ def main():
 
     # use srgan
 
-    if args.srgan != 0:
+    if args.srgan:
         srgan_generator = SRGAN.GeneratorResNet().to(device)
-        srgan_generator.load_state_dict(torch.load(f"Checkpoints/srgan_10.pth", map_location=device))
+        srgan_checkpoint = torch.load(f"Checkpoints/srgan_100.chkpt", map_location=device)
+        srgan_generator.load_state_dict(srgan_checkpoint['generator_state_dict'])
 
         srgan_generator.eval()
         with torch.no_grad():
              enhanced_fakes = srgan_generator(fakes).detach().cpu()
 
-        plt.figure(figsize=(12,12))
+        plt.figure(figsize=(18,18))
         plt.title(f"Seed: {args.seed}")
         plt.axis("off")
         plt.imshow(np.transpose(vutils.make_grid(enhanced_fakes, padding=2, normalize=True),(2,1,0)))
@@ -76,7 +75,7 @@ def main():
     # default setting -> vanilla dcgan generation
 
     else:
-        plt.figure(figsize=(12,12))
+        plt.figure(figsize=(18,18))
         plt.title(f"Seed: {args.seed}")
         plt.axis("off")
         plt.imshow(np.transpose(vutils.make_grid(fakes.cpu(), padding=2, normalize=True),(2,1,0)))

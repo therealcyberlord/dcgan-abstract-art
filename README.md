@@ -14,14 +14,14 @@ Download the libraries used with
 
 
 Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
-``` python Main.py [num_images] [--seed=somenumber] [--checkpoint=somenumber] [--srgan=somenumber]```
+``` python Main.py [num_images] [--seed=somenumber] [--checkpoint=somenumber] [--srgan]```
 
-eg: ``` python Main.py 104 --seed 90 --checkpoint 120 --srgan 1``` 
+eg: ``` python Main.py 104 --seed 90 --checkpoint 150 --srgan``` 
 
 ***
 the arg values will be in type integer and num_images must be in the range (0, 120], only the argument num_images is required.
 
-checkpoint_num $\in$ [70, 100, 120, 150], default: 150
+checkpoint_num: default: 150, you can also use your own trained checkpoints, see the ipynb notebook to continue training. 
 
 Run ```pip Main.py -h``` for more information
 

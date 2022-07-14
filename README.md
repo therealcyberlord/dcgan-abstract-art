@@ -21,7 +21,7 @@ eg: ``` python Main.py 104 --seed 90 --checkpoint 150 --srgan```
 ***
 the arg values will be in type integer and num_images must be in the range (0, 120], only the argument num_images is required.
 
-checkpoint_num: default: 150, you can also use your own trained checkpoints
+checkpoint_num: default: 150, you can also use your own trained checkpoints, see the ipynb notebook to continue training. 
 
 Run ```pip Main.py -h``` for more information
 

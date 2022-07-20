@@ -27,6 +27,9 @@ Run ```pip Main.py -h``` for more information
 
 <img src="https://github.com/therealcyberlord/DCGAN/blob/master/GIFS/gan-visulization.gif" width="100%">
 
+# Upscaled with ESRGAN
+<img src="https://github.com/therealcyberlord/DCGAN-Abstract-Art/blob/master/esrgan_upscale.png" width="100%">
+
 Sources:
 * Arxiv Paper: https://arxiv.org/pdf/1511.06434v2.pdf
 

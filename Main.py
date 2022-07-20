@@ -62,7 +62,7 @@ def main():
         esrgan_checkpoint = torch.load("Checkpoints/esrgan.pt", map_location=device)
         esrgan_generator.load_state_dict(esrgan_checkpoint)
 
-        # save generator using torchscipt 
+        # use the esrgan to perform super resolution
 
         esrgan_generator.eval()
         with torch.no_grad():

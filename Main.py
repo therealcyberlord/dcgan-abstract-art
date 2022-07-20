@@ -4,6 +4,7 @@ import torchvision.utils as vutils
 import random 
 import DCGAN
 import SRGAN
+from Utils import visualize_generations, color_histogram_mapping
 import matplotlib.pyplot as plt 
 import numpy as np 
 import argparse
@@ -45,8 +46,6 @@ def main():
     generator = DCGAN.Generator(latent_size).to(device)
 
 
-    # restore to the checkpoint
-
     dcgan_checkpoint = torch.load(checkpoint_path, map_location=device)
     generator.load_state_dict(dcgan_checkpoint['generator_state_dict'])
 
@@ -58,28 +57,22 @@ def main():
     # use srgan
 
     if args.srgan:
-        srgan_generator = SRGAN.GeneratorResNet().to(device)
-        srgan_checkpoint = torch.load(f"Checkpoints/srgan_100.chkpt", map_location=device)
-        srgan_generator.load_state_dict(srgan_checkpoint['generator_state_dict'])
+         # restore to the checkpoint
+        esrgan_generator = SRGAN.GeneratorRRDB(channels=3, filters=64, num_res_blocks=23).to(device)
+        esrgan_checkpoint = torch.load("Checkpoints/esrgan.pt", map_location=device)
+        esrgan_generator.load_state_dict(esrgan_checkpoint)
 
-        srgan_generator.eval()
+        # save generator using torchscipt 
+
+        esrgan_generator.eval()
         with torch.no_grad():
-             enhanced_fakes = srgan_generator(fakes).detach().cpu()
+             enhanced_fakes = esrgan_generator(fakes).detach().cpu()
+        color_match = color_histogram_mapping(enhanced_fakes, fakes.cpu())
+        visualize_generations(args.seed, color_match)
 
-        plt.figure(figsize=(18,18))
-        plt.title(f"Seed: {args.seed}")
-        plt.axis("off")
-        plt.imshow(np.transpose(vutils.make_grid(enhanced_fakes, padding=2, normalize=True),(2,1,0)))
-        plt.show()
- 
     # default setting -> vanilla dcgan generation
-
     else:
-        plt.figure(figsize=(18,18))
-        plt.title(f"Seed: {args.seed}")
-        plt.axis("off")
-        plt.imshow(np.transpose(vutils.make_grid(fakes.cpu(), padding=2, normalize=True),(2,1,0)))
-        plt.show()
+        visualize_generations(args.seed, fakes.cpu())
 
 
 if __name__ == "__main__":

@@ -17,9 +17,15 @@ def color_histogram_mapping(images, references):
 
 
 def visualize_generations(seed, images):
+    num_images = len(images)
+    if num_images <= 16:
+        nrow = 2
+    else:
+        nrow = (len(images) - 16) // 16 + 2
+
     plt.figure(figsize=(16, 16))
     plt.title(f"Seed: {seed}")
     plt.axis("off")
-    plt.imshow(np.transpose(vutils.make_grid(images, padding=2, nrow=5, normalize=True), (2, 1, 0)))
+    plt.imshow(np.transpose(vutils.make_grid(images, padding=2, nrow=nrow, normalize=True), (2, 1, 0)))
     plt.show()
 

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import torchvision.utils as vutils
+import torchvision.transforms as transforms
 from skimage.exposure import match_histograms
 import torch
 
@@ -17,15 +18,23 @@ def color_histogram_mapping(images, references):
 
 
 def visualize_generations(seed, images):
-    num_images = len(images)
-    if num_images <= 16:
-        nrow = 2
-    else:
-        nrow = (num_images - 16) // 16 + 2
-
     plt.figure(figsize=(16, 16))
     plt.title(f"Seed: {seed}")
     plt.axis("off")
-    plt.imshow(np.transpose(vutils.make_grid(images, padding=2, nrow=nrow, normalize=True), (2, 1, 0)))
+    plt.imshow(np.transpose(vutils.make_grid(images, padding=2, nrow=5, normalize=True), (2, 1, 0)))
     plt.show()
+
+
+# denormalize the images for proper display
+def denormalize_images(images):
+    mean= [0.5, 0.5, 0.5]
+    std= [0.5, 0.5, 0.5]
+    inv_normalize = transforms.Normalize(
+        mean=[-m / s for m, s in zip(mean, std)],
+        std=[1 / s for s in std]
+    )
+    return inv_normalize(images)
+
+
+
 

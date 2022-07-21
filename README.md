@@ -16,7 +16,7 @@ Download the libraries used with
 Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
 ``` python Main.py [num_images] [--seed=somenumber] [--checkpoint=somenumber] [--srgan]```
 
-eg: ``` python Main.py 104 --seed 90 --checkpoint 150 --srgan``` 
+eg: ``` python Main.py 20 --seed 90 --checkpoint 150 --srgan``` 
 
 ***
 the arg values will be in type integer and num_images must be in the range (0, 120], only the argument num_images is required.

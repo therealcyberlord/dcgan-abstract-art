@@ -16,10 +16,10 @@ Download the libraries used with
 Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
 ``` python Main.py [num_images] [--seed=somenumber] [--checkpoint=somenumber] [--srgan]```
 
-eg: ``` python Main.py 104 --seed 90 --checkpoint 150 --srgan``` 
+eg: ``` python Main.py 6 --seed 90 --checkpoint 150 --srgan``` 
 
 ***
-the arg values will be in type integer and num_images must be in the range (0, 120], only the argument num_images is required.
+the arg values will be in type integer and num_images must be in the range (0, 120], only the argument num_images is required. Try reducing the number of images that you are applying super resolution if you are running out of memory.
 
 checkpoint_num: default: 150, you can also use your own trained checkpoints, see the ipynb notebook to continue training. 
 

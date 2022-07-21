@@ -21,7 +21,7 @@ def visualize_generations(seed, images):
     if num_images <= 16:
         nrow = 2
     else:
-        nrow = (len(images) - 16) // 16 + 2
+        nrow = (num_images - 16) // 16 + 2
 
     plt.figure(figsize=(16, 16))
     plt.title(f"Seed: {seed}")

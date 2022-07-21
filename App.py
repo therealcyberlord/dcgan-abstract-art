@@ -3,6 +3,7 @@ import torch
 import DCGAN
 import SRGAN
 from Utils import color_histogram_mapping, denormalize_images
+import torch.nn as nn
 
 device = torch.device("cpu")
 
@@ -12,6 +13,7 @@ if torch.cuda.is_available():
 latent_size = 100
 checkpoint_path = "Checkpoints/150epochs.chkpt"
 
+st.title("Generating Abstract Art")
 st.sidebar.subheader("Configurations")
 seed = st.sidebar.slider('Seed', -1000, 1000, 0)
 
@@ -39,7 +41,7 @@ if generate:
     # use srgan for super resolution
     if use_srgan == "Yes":
         # restore to the checkpoint
-        st.write("Using DCGAN and ESRGAN upscale...")
+        st.write("Using DCGAN then ESRGAN upscale...")
         esrgan_generator = SRGAN.GeneratorRRDB(channels=3, filters=64, num_res_blocks=23).to(device)
         esrgan_checkpoint = torch.load("Checkpoints/esrgan.pt", map_location=device)
         esrgan_generator.load_state_dict(esrgan_checkpoint)
@@ -56,9 +58,10 @@ if generate:
 
     # default setting -> vanilla dcgan generation
     if use_srgan == "No":
+        fakes = nn.functional.interpolate(fakes.cpu(), scale_factor=4)
         st.write("Using DCGAN Model...")
         for i in range(len(fakes)):
-            st.image(denormalize_images(fakes[i]).permute(1, 2, 0).cpu().numpy())
+            st.image(denormalize_images(fakes[i]).permute(1, 2, 0).numpy())
 
 
 

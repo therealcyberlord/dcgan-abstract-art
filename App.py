@@ -4,7 +4,7 @@ import DCGAN
 import SRGAN
 from Utils import color_histogram_mapping, denormalize_images
 import torch.nn as nn
-
+import random
 
 device = torch.device("cpu")
 
@@ -31,6 +31,9 @@ use_srgan = st.sidebar.selectbox(
 generate = st.sidebar.button("Generate")
 
 if generate:
+    torch.manual_seed(seed)
+    random.seed(seed)
+    
     sampled_noise = torch.randn(num_images, latent_size, 1, 1, device=device)
     generator = DCGAN.Generator(latent_size).to(device)
 

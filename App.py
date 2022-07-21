@@ -5,15 +5,19 @@ import SRGAN
 from Utils import color_histogram_mapping, denormalize_images
 import torch.nn as nn
 
+
 device = torch.device("cpu")
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
 
 latent_size = 100
+display_width = 512
 checkpoint_path = "Checkpoints/150epochs.chkpt"
 
 st.title("Generating Abstract Art")
+st.text("start generarting by configuring the settings")
+
 st.sidebar.subheader("Configurations")
 seed = st.sidebar.slider('Seed', -1000, 1000, 0)
 
@@ -53,15 +57,15 @@ if generate:
 
         for i in range(len(color_match)):
             # denormalize and permute to correct color channel
-            st.image(denormalize_images(color_match[i]).permute(1, 2, 0).numpy())
+            st.image(denormalize_images(color_match[i]).permute(1, 2, 0).numpy(), width=display_width)
 
 
     # default setting -> vanilla dcgan generation
     if use_srgan == "No":
-        fakes = nn.functional.interpolate(fakes.cpu(), scale_factor=4)
+        fakes = fakes.cpu()
         st.write("Using DCGAN Model...")
         for i in range(len(fakes)):
-            st.image(denormalize_images(fakes[i]).permute(1, 2, 0).numpy())
+            st.image(denormalize_images(fakes[i]).permute(1, 2, 0).numpy(), width=display_width)
 
 
 

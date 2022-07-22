@@ -35,12 +35,12 @@ generate = st.sidebar.button("Generate")
 
 @st.cache(allow_output_mutation=True)
 def load_dcgan():
-    model = torch.jit.load('Checkpoints/dcgan.pt')
+    model = torch.jit.load('Checkpoints/dcgan.pt', map_location=device)
     return model 
 
 @st.cache(allow_output_mutation=True)
 def load_esrgan():
-    model_state_dict = torch.load("Checkpoints/esrgan.pt")
+    model_state_dict = torch.load("Checkpoints/esrgan.pt", map_location=device)
     return model_state_dict
 
 if generate:

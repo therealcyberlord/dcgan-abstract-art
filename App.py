@@ -16,7 +16,8 @@ display_width = 450
 checkpoint_path = "Checkpoints/150epochs.chkpt"
 
 st.title("Generating Abstract Art")
-st.text("start generating by configuring the settings (left side bar)")
+st.text("start generating (left side bar)")
+st.text("Made by Xingyu B.")
 
 st.sidebar.subheader("Configurations")
 seed = st.sidebar.slider('Seed', -10000, 10000, 0)

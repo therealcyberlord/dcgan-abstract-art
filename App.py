@@ -16,7 +16,7 @@ display_width = 512
 checkpoint_path = "Checkpoints/150epochs.chkpt"
 
 st.title("Generating Abstract Art")
-st.text("start generarting by configuring the settings")
+st.text("start generating by configuring the settings")
 
 st.sidebar.subheader("Configurations")
 seed = st.sidebar.slider('Seed', -1000, 1000, 0)
@@ -30,16 +30,22 @@ use_srgan = st.sidebar.selectbox(
 
 generate = st.sidebar.button("Generate")
 
+@st.cache(allow_output_mutation=True)
+def load_dcgan():
+    model = torch.jit.load('Checkpoints/dcgan.pt')
+    return model 
+
+@st.cache(allow_output_mutation=True)
+def load_esrgan():
+    model_state_dict = torch.load("Checkpoints/esrgan.pt")
+    return model_state_dict
+
 if generate:
     torch.manual_seed(seed)
     random.seed(seed)
     
     sampled_noise = torch.randn(num_images, latent_size, 1, 1, device=device)
-    generator = DCGAN.Generator(latent_size).to(device)
-
-    dcgan_checkpoint = torch.load(checkpoint_path, map_location=device)
-    generator.load_state_dict(dcgan_checkpoint['generator_state_dict'])
-
+    generator = load_dcgan()
     generator.eval()
 
     with torch.no_grad():
@@ -50,7 +56,7 @@ if generate:
         # restore to the checkpoint
         st.write("Using DCGAN then ESRGAN upscale...")
         esrgan_generator = SRGAN.GeneratorRRDB(channels=3, filters=64, num_res_blocks=23).to(device)
-        esrgan_checkpoint = torch.load("Checkpoints/esrgan.pt", map_location=device)
+        esrgan_checkpoint = load_esrgan()
         esrgan_generator.load_state_dict(esrgan_checkpoint)
 
         esrgan_generator.eval()

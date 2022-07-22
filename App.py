@@ -19,7 +19,7 @@ st.title("Generating Abstract Art")
 st.text("start generating by configuring the settings (left side bar)")
 
 st.sidebar.subheader("Configurations")
-seed = st.sidebar.slider('Seed', -1000, 1000, 0)
+seed = st.sidebar.slider('Seed', -10000, 10000, 0)
 
 num_images = st.sidebar.slider('Number of Images', 1, 20, 10)
 

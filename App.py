@@ -12,11 +12,11 @@ if torch.cuda.is_available():
     device = torch.device("cuda")
 
 latent_size = 100
-display_width = 512
+display_width = 450
 checkpoint_path = "Checkpoints/150epochs.chkpt"
 
 st.title("Generating Abstract Art")
-st.text("start generating by configuring the settings")
+st.text("start generating by configuring the settings (left side bar)")
 
 st.sidebar.subheader("Configurations")
 seed = st.sidebar.slider('Seed', -1000, 1000, 0)
@@ -43,6 +43,7 @@ def load_esrgan():
     model_state_dict = torch.load("Checkpoints/esrgan.pt", map_location=device)
     return model_state_dict
 
+# if the user wants to generate something new 
 if generate:
     torch.manual_seed(seed)
     random.seed(seed)

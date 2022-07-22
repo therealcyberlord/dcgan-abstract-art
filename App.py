@@ -30,6 +30,9 @@ use_srgan = st.sidebar.selectbox(
 
 generate = st.sidebar.button("Generate")
 
+
+# caching the expensive model loading 
+
 @st.cache(allow_output_mutation=True)
 def load_dcgan():
     model = torch.jit.load('Checkpoints/dcgan.pt')

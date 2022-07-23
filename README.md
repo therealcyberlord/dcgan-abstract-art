@@ -6,6 +6,11 @@ This project will utilze the model proposed by the 2015 paper "UNSUPERVISED REPR
 
 Dataset used: https://www.kaggle.com/datasets/bryanb/abstract-art-gallery
 
+# Web App
+
+Now you can generate abstract art from your browser: https://therealcyberlord-dcgan-abstract-art-app-2kdndr.streamlitapp.com/
+Use the left side bar to configure the generation settings
+
 # Running the project locally 
 
 Download the libraries used with

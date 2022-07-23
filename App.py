@@ -22,7 +22,7 @@ st.text("Made by Xingyu B.")
 st.sidebar.subheader("Configurations")
 seed = st.sidebar.slider('Seed', -10000, 10000, 0)
 
-num_images = st.sidebar.slider('Number of Images', 1, 10, 5)
+num_images = st.sidebar.slider('Number of Images', 1, 10, 1)
 
 use_srgan = st.sidebar.selectbox(
     'Apply image enhancement',

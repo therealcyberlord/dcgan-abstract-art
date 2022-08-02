@@ -8,8 +8,9 @@ Dataset used: https://www.kaggle.com/datasets/bryanb/abstract-art-gallery
 
 # Web App
 
-Now you can generate abstract art from your browser: https://therealcyberlord-dcgan-abstract-art-app-2kdndr.streamlitapp.com/
-Use the left side bar to configure the generation settings
+Streamlit App: https://therealcyberlord-dcgan-abstract-art-app-2kdndr.streamlitapp.com/
+
+Huggingface Demo: https://huggingface.co/spaces/therealcyberlord/abstract-art-generation
 
 # Running the project locally 
 

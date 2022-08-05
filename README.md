@@ -39,5 +39,6 @@ Run ```pip Main.py -h``` for more information
 Sources:
 * DCGAN Arxiv Paper: https://arxiv.org/pdf/1511.06434v2.pdf
 * ESRGAN Arvix Paper: https://arxiv.org/pdf/1809.00219.pdf
+* PyTorch GANS: https://github.com/eriklindernoren/PyTorch-GAN
 * This also take a lot of inspiration from the PyTorch DCGAN Tutorial, check it out <a href="https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html">here</a>
 

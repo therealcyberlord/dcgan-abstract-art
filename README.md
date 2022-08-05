@@ -16,9 +16,7 @@ Download the libraries used with
 
 ``` pip install -r requirements.txt ```
 
-* Update: ESRGAN model exceeds the github-lf size, please download it from my huggingface model page: https://huggingface.co/therealcyberlord/ESRGAN-Abstract-Art/tree/main
-
-download the huggingface repo and paste esrgan.pt into the Checkpoints folder 
+* Update: ESRGAN model exceeds the github-lf size, please download it from my huggingface model page: https://huggingface.co/therealcyberlord/ESRGAN-Abstract-<b>Art/tree/main <br>download the huggingface repo and paste esrgan.pt into the Checkpoints folder otherwise the demo will not work properly</b>
 
 
 Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run

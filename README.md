@@ -8,8 +8,6 @@ Dataset used: https://www.kaggle.com/datasets/bryanb/abstract-art-gallery
 
 # Web App
 
-Streamlit App: https://therealcyberlord-dcgan-abstract-art-app-2kdndr.streamlitapp.com/
-
 Huggingface Demo: https://huggingface.co/spaces/therealcyberlord/abstract-art-generation
 
 # Running the project locally 

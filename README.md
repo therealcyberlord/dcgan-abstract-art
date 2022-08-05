@@ -16,6 +16,8 @@ Download the libraries used with
 
 ``` pip install -r requirements.txt ```
 
+Update: ESRGAN model exceeds the github-lf size, please download it from my 
+
 
 Navigate to the cloned/downloaded directory (DCGAN-Abstract-Art) and run
 ``` python Main.py [num_images] [--seed=somenumber] [--checkpoint=somenumber] [--srgan]```

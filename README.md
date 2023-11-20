@@ -29,7 +29,7 @@ the arg values will be in type integer and num_images must be in the range (0, 1
 
 checkpoint_num: default: 150, you can also use your own trained checkpoints, see the ipynb notebook to continue training. 
 
-Run ```pip Main.py -h``` for more information
+Run ```python Main.py -h``` for more information
 
 <img src="https://github.com/therealcyberlord/DCGAN/blob/master/GIFS/gan-visulization.gif" width="100%">
 
